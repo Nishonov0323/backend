@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Subject(models.Model):
     name = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=10, decimal_places=2)
@@ -7,11 +8,13 @@ class Subject(models.Model):
     def __str__(self):
         return self.name
 
+
 class Room(models.Model):
     name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
+
 
 class Group(models.Model):
     name = models.CharField(max_length=100)
@@ -26,6 +29,7 @@ class Group(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class Student(models.Model):
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
@@ -47,6 +51,7 @@ class Student(models.Model):
     def __str__(self):
         return self.name
 
+
 class Teacher(models.Model):
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
@@ -65,6 +70,7 @@ class Teacher(models.Model):
     def __str__(self):
         return self.name
 
+
 class LeaveRequest(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     date = models.DateField()
@@ -75,6 +81,7 @@ class LeaveRequest(models.Model):
 
     def __str__(self):
         return f"{self.student.name} - {self.date}"
+
 
 class Payment(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)

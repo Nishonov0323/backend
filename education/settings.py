@@ -4,15 +4,18 @@ Django settings for oquv_markaz project.
 
 import os
 from pathlib import Path
-from decouple import config
+from dotenv import load_dotenv
+
+# .env faylini yuklash
+load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = config('SECRET_KEY', default='django-insecure-pu-r7@lphkdl0+wn24$*0^q8cbyc^%l^f)yu=b(qvu^^_hwx7e')
+SECRET_KEY = os.getenv('SECRET_KEY')
 
-DEBUG = config('DEBUG', default=True, cast=bool)
+DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -55,7 +58,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'oquv_markaz.wsgi.application'
+WSGI_APPLICATION = 'education.wsgi.application'
 
 DATABASES = {
     'default': {
